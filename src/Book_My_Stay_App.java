@@ -20,34 +20,41 @@ class RoomInventory{
     }
 
 }
+class RoomSearchService{
+    public void searchAvailableRooms(RoomInventory rooms){
+        HashMap<String,Integer> availability=rooms.getRoomAvailability();
+        for (String room:availability.keySet()){
+            System.out.println("Room: "+room);
+            if(availability.get(room)>0) {
+                if (room.equals("Single")) {
+                    System.out.println("Beds: 1");
+                    System.out.println("Size: 250ft");
+                    System.out.println("Price per Night: 1500.0");
+                    System.out.println("Available Rooms: " + availability.get(room));
+                    System.out.println();
+                }else if (room.equals("Double")) {
+                    System.out.println("Beds: 2");
+                    System.out.println("Size: 400ft");
+                    System.out.println("Price per Night: 2500.0");
+                    System.out.println("Available Rooms: "+availability.get(room));
+                    System.out.println();
+                }else if (room.equals("Suite")){
+                    System.out.println("Beds: 3");
+                    System.out.println("Size: 750ft");
+                    System.out.println("Price per Night: 5000.0");
+                    System.out.println("Available Rooms: "+availability.get(room));
+                    System.out.println();
+                }
+
+            }
+        }
+    }
+}
 public class Book_My_Stay_App {
     public static void main(String[] args){
         RoomInventory rooms=new RoomInventory();
-        System.out.println("Hotel Room Inventory Status\n");
-        HashMap<String,Integer> map=rooms.getRoomAvailability();
-        for(String room:map.keySet()){
-            System.out.println("Room: "+room);
-            if(room.equals("Single")){
-                System.out.println("Beds: 1");
-                System.out.println("Size: 250ft");
-                System.out.println("Price per Night: 1500.0");
-                System.out.println("Available Rooms: "+map.get(room));
-                System.out.println();
-            } else if (room.equals("Double")) {
-                System.out.println("Beds: 2");
-                System.out.println("Size: 400ft");
-                System.out.println("Price per Night: 2500.0");
-                System.out.println("Available Rooms: "+map.get(room));
-                System.out.println();
-            }else if (room.equals("Suite")){
-                System.out.println("Beds: 3");
-                System.out.println("Size: 750ft");
-                System.out.println("Price per Night: 5000.0");
-                System.out.println("Available Rooms: "+map.get(room));
-                System.out.println();
-            }
-        }
-        rooms.updateAvailability("suite",10);
-
+        RoomSearchService search=new RoomSearchService();
+        System.out.println("Room search\n");
+        search.searchAvailableRooms(rooms);
     }
 }
